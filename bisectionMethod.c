@@ -28,11 +28,17 @@ int main() {
 		}
 	} while(true); 
 	// find the intermediate point
+	bool ok = false; 
 	x = bisect(x1, x2); 
 	int iter = 1; 
 	do {
 		printf("Iterations = %d, x1 = %lf, x2 = %lf, x = %lf", iter, x1, x2, x); 
 		puts(""); 
+		if(ok) {
+			printf("The root of the equation is : %lf", x); 
+			puts(""); 
+			break;
+		}
 		if(find_value_at(x) * find_value_at(x1) < 0) {
 			x2 = x; 
 		} else {
@@ -40,9 +46,7 @@ int main() {
 		}
 		x3 = bisect(x1, x2); 
 		if(fabs(x3 - x) < error) {
-			printf("The root of the equation is : %lf", x); 
-			puts(""); 
-			break; 
+			ok = true; 
 		}
 		x = x3; 
 		iter++; 
